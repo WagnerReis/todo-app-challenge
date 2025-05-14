@@ -1,5 +1,6 @@
 import Image from "next/image";
 import headerImage from "../assets/bg-desktop-dark.jpg";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       <div className="w-[540px]  h-[540px] mx-auto mt-[-230px]">
         <div className="flex justify-between">
           <h1 className="top-[300px] text-white text-5xl font-bold">TODO</h1>
-          <button>toggle</button>
+          <ThemeToggle />
         </div>
       </div>
     </main>
