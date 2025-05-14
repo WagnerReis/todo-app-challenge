@@ -1,13 +1,19 @@
+"use client";
 import Image from "next/image";
-import headerImage from "../assets/bg-desktop-dark.jpg";
+import { useTheme } from "next-themes";
 import ThemeToggle from "@/components/theme-toggle";
 
+import headerImageDark from "../assets/bg-desktop-dark.jpg";
+import headerImageLight from "../assets/bg-desktop-light.jpg";
+
 export default function Home() {
+  const { theme } = useTheme();
+
   return (
     <main className="bg-background object-cover w-full h-screen flex flex-col">
       <header>
         <Image
-          src={headerImage}
+          src={theme === "dark" ? headerImageDark : headerImageLight}
           alt="header"
           className="w-full h-[300px] object-cover"
         />
