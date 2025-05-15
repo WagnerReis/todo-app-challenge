@@ -7,7 +7,7 @@ import { getHeaderImage } from "@/utils/get-header-image";
 import { useEffect, useState } from "react";
 
 import imageDefault from "../assets/bg-desktop-light.jpg";
-import { TaskItem } from "./task-item";
+import { TaskList } from "./task-list";
 
 export default function HomeContent() {
   const { theme = "light" } = useTheme();
@@ -46,7 +46,7 @@ export default function HomeContent() {
           </h1>
           <ThemeToggle />
         </div>
-        <TaskItem />
+        <TaskList />
       </div>
     </>
   );
