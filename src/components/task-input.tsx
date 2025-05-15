@@ -7,7 +7,7 @@ export function TaskInput() {
       <input
         type="text"
         placeholder="Create a new todo..."
-        className="text-foreground py-2 outline-none"
+        className="text-foreground py-2 outline-none w-full pr-8"
       />
     </div>
   );

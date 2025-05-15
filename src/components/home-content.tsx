@@ -40,7 +40,7 @@ export default function HomeContent() {
           className="w-full h-[300px] object-cover transition-opacity duration-500 opacity-100"
         />
       </header>
-      <div className="w-full px-6 md:px-0 max-w-[540px] mx-auto mt-[-230px]">
+      <div className="w-full min-h-[calc(100vh-70px)] flex flex-col px-6 md:px-0 max-w-[540px] mx-auto mt-[-230px]">
         <div className="flex justify-between">
           <h1 className="top-[300px] text-white text-5xl font-bold tracking-[18px]">
             TODO
@@ -49,6 +49,11 @@ export default function HomeContent() {
         </div>
         <TaskInput />
         <TaskList />
+        <footer className="text-center my-[52px]">
+          <span className="bottom-[72px] md:bottom-[52px] left-1/2 -translate-x-1/2 text-gray-400 dark:text-gray-500 text-[14px]">
+            Drag and drop to reorder list
+          </span>
+        </footer>
       </div>
     </>
   );
