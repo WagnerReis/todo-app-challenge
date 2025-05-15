@@ -1,3 +1,4 @@
+import { NavbarStatus } from "./navbar-status";
 import { TaskItem } from "./task-item";
 import { Separator } from "./ui/separator";
 
@@ -11,6 +12,7 @@ export function TaskList() {
           {index < 4 && <Separator />}
         </div>
       ))}
+      <NavbarStatus />
     </main>
   );
 }
