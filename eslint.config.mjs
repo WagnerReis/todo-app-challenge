@@ -11,7 +11,11 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript").concat(eslintPluginPrettier),
+  {
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  ...compat
+    .extends("next/core-web-vitals", "next/typescript")
+    .concat(eslintPluginPrettier),
 ];
-
 export default eslintConfig;
