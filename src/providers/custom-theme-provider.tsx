@@ -13,6 +13,7 @@ export function CustomThemeProvider({ children }: CustomThemeProviderProps) {
       attribute="class"
       defaultTheme="system"
       storageKey="@todo-app-theme"
+      themes={["dark", "light"]}
       enableSystem
     >
       {children}
