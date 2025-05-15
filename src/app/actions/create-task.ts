@@ -1,11 +1,14 @@
 "use server";
 
 import Task from "@/lib/models/Task";
+import { z } from "zod";
 
-interface CreateTaskInput {
-  description: string;
-  completed: boolean;
-}
+const CreateTaskSchema = z.object({
+  description: z.string().min(3, "A descrição é obrigatória"),
+  completed: z.boolean(),
+});
+
+type CreateTaskInput = z.infer<typeof CreateTaskSchema>;
 
 interface PrevStateProps {
   error?: string;
@@ -14,19 +17,24 @@ interface PrevStateProps {
 
 export async function createTask(prevState: PrevStateProps, formData: FormData) {
   try {
-    const description = formData.get("description")?.toString().trim();
-    const checked = formData.get('checked') === 'on';
+    const raw = {
+      description: formData.get("description")?.toString().trim(),
+      completed: formData.get("checked") === "on",
+    };
 
-    if (!description) {
+    const result = CreateTaskSchema.safeParse(raw);
+
+    if (!result.success) {
+      console.log(result.error.errors[0].message)
       return {
         ...prevState,
-        error: "Campo obrigatório!"
+        error: result.error.errors[0].message
       };
     }
 
     const task: CreateTaskInput = {
-      description,
-      completed: checked,
+      description: raw.description as string,
+      completed: raw.completed as boolean,
     };
 
     console.log("creating task...");
