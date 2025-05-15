@@ -1,9 +1,5 @@
-import HomeContent from "../components/home-content";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main className="bg-background object-cover w-full h-screen flex flex-col">
-      <HomeContent />
-    </main>
-  );
+  return redirect("/home");
 }
