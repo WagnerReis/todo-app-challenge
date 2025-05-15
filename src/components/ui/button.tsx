@@ -14,7 +14,7 @@ export function Button({
   return (
     <button
       /* eslint-disable prettier/prettier */
-      className={`w-6 h-6 rounded-full cursor-pointer ${checked
+      className={`w-6 h-6 rounded-full cursor-custom ${checked
         ? "bg-gradient-to-br from-[var(--brand-start)] to-[var(--brand-end)] flex items-center justify-center"
         : "border-2 border-gray-300 dark:border-gray-600"
         } ${className}`}

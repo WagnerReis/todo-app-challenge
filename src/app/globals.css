@@ -10,6 +10,10 @@
   transition-duration: 0.3s;
 }
 
+.cursor-custom {
+  cursor: url('/cursor-hover.svg'), auto;
+}
+
 @layer base {
   :root {
     --background: #FAFAFA;
