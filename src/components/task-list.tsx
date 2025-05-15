@@ -6,7 +6,8 @@ export function TaskList() {
     <main className="w-full min-h-[440px] bg-muted-background rounded-lg">
       {Array.from({ length: 5 }).map((_, index) => (
         <div key={index}>
-          <TaskItem />
+          {index % 2 === 0 ? <TaskItem /> : <TaskItem checked />}
+
           {index < 4 && <Separator />}
         </div>
       ))}
