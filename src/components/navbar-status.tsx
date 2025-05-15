@@ -16,7 +16,6 @@ interface NavItemProps {
 }
 
 function NavItem({ label, onClick, selected }: NavItemProps) {
-  console.log("la");
   return (
     <button
       className={`${baseClass} ${selected === label ? "text-violet-600 dark:text-violet-600" : ""}`}
