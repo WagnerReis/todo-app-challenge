@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import imageDefault from "../assets/bg-desktop-light.jpg";
 import { TaskList } from "./task-list";
+import { TaskInput } from "./task-input";
 
 export default function HomeContent() {
   const { theme = "light" } = useTheme();
@@ -36,7 +37,7 @@ export default function HomeContent() {
           src={backgroundImage}
           alt="header"
           priority
-          className="w-full h-[300px] object-cover"
+          className="w-full h-[300px] object-cover transition-opacity duration-500 opacity-100"
         />
       </header>
       <div className="w-full px-6 md:px-0 max-w-[540px] mx-auto mt-[-230px]">
@@ -46,6 +47,7 @@ export default function HomeContent() {
           </h1>
           <ThemeToggle />
         </div>
+        <TaskInput />
         <TaskList />
       </div>
     </>
