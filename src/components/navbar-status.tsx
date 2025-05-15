@@ -1,3 +1,6 @@
+"use client";
+import { useIsMobile } from "@/hooks/use-mobile";
+
 const statusOptions = ["All", "Active", "Completed"];
 
 const baseClass =
@@ -8,8 +11,14 @@ function NavItem({ label }: { label: string }) {
 }
 
 export function NavbarStatus() {
+  const isMobile = useIsMobile();
+
+  const mobileBaseClass = isMobile ? "bg-muted-background mt-4 rounded-lg" : "";
+
   return (
-    <nav className="w-full h-12 flex gap-[18px] justify-center items-center">
+    <nav
+      className={`w-full h-12 flex gap-[18px] justify-center items-center ${mobileBaseClass}`}
+    >
       {statusOptions.map((status) => (
         <NavItem key={status} label={status} />
       ))}
