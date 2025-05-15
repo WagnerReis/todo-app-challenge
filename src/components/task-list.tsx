@@ -60,7 +60,7 @@ export function TaskList() {
 
   return (
     <main>
-      <div className="w-full flex flex-col bg-muted-background rounded-lg shadow-xl overflow-hidden">
+      <div className="w-full min-h-[368px] flex flex-col bg-muted-background rounded-lg shadow-xl overflow-hidden">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -69,25 +69,27 @@ export function TaskList() {
           <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
             <div>
               {tasks.map((task, index) => (
-                <>
-                  <TaskItem key={task.id} id={task.id} checked={task.checked} />
+                <div key={task.id}>
+                  <TaskItem id={task.id} checked={task.checked} />
                   {index < tasks.length - 1 && <Separator />}
-                </>
+                </div>
               ))}
             </div>
           </SortableContext>
         </DndContext>
-
-        <footer className="flex justify-between h-12 w-full">
-          <span className="text-[14px] w-[250px] pl-6 flex items-center text-gray-400">
-            5 items left
-          </span>
-          {!isMobile && <NavbarStatus />}
-          <button className="w-[250px] pr-6 flex items-center justify-end cursor-custom">
-            <span className="text-[14px] text-foreground hover:text-muted-foreground">
-              Clear Completed
+        <footer className="flex flex-col mt-auto">
+          <Separator />
+          <div className="flex justify-between h-12 w-full">
+            <span className="text-[14px] w-[250px] pl-6 flex items-center text-gray-400">
+              5 items left
             </span>
-          </button>
+            {!isMobile && <NavbarStatus />}
+            <button className="w-[250px] pr-6 flex items-center justify-end cursor-custom">
+              <span className="text-[14px] text-foreground hover:text-muted-foreground">
+                Clear Completed
+              </span>
+            </button>
+          </div>
         </footer>
       </div>
 
