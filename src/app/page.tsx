@@ -20,7 +20,9 @@ export default function Home() {
       </header>
       <div className="w-[540px]  h-[540px] mx-auto mt-[-230px]">
         <div className="flex justify-between">
-          <h1 className="top-[300px] text-white text-5xl font-bold">TODO</h1>
+          <h1 className="top-[300px] text-white text-5xl font-bold tracking-[18px]">
+            TODO
+          </h1>
           <ThemeToggle />
         </div>
       </div>
