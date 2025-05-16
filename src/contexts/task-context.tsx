@@ -9,6 +9,7 @@ export type TaskContextType = {
   addTaskLocaly: (newTask: TaskProps) => void;
   deleteTaskLocaly: (taskId: string) => void;
   refreshTasks: () => Promise<void>;
+  toggleStatusTaskLocaly: (taskId: string) => void;
 }
 
 interface TaskProviderProps {
@@ -37,6 +38,18 @@ export function TaskProvider({ children }: TaskProviderProps) {
     })
   }
 
+  function toggleStatusTaskLocaly(taskId: string) {
+    setTasks(state => {
+      state = tasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, checked: !task.checked }
+        }
+        return task
+      })
+      return state
+    })
+  }
+
   const refreshTasks = async () => {
     const tasksData = await getTasks();
 
@@ -55,6 +68,13 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
 
   return (
-    <TaskContext.Provider value={{ tasks, setTasks, addTaskLocaly, deleteTaskLocaly, refreshTasks }}>{children}</TaskContext.Provider>
+    <TaskContext.Provider value={{
+      tasks,
+      setTasks,
+      addTaskLocaly,
+      deleteTaskLocaly,
+      refreshTasks,
+      toggleStatusTaskLocaly
+    }}>{children}</TaskContext.Provider>
   )
 }
