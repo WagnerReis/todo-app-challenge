@@ -13,7 +13,6 @@ export async function getTasks(query: keyof typeof queryMap) {
   try {
     await connectToMongoDB();
 
-    console.log(process.env.MONGODB_URI)
     const tasks = await Task.find(queryMap[query], {}, { sort: { completed: 1 } }).lean().exec();
     return getTasksMapper(tasks as unknown as ITask[]);
   } catch (error) {
