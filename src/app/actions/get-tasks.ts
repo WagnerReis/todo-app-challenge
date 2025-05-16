@@ -11,7 +11,7 @@ const queryMap = {
 export async function getTasks(query: keyof typeof queryMap) {
   try {
     console.log(queryMap[query])
-    const tasks = await Task.find(queryMap[query]).lean().exec();
+    const tasks = await Task.find(queryMap[query], {}, { sort: { completed: 1 } }).lean().exec();
     return getTasksMapper(tasks as unknown as ITask[]);
   } catch (error) {
     console.error("Erro ao buscar tarefas:", error);
