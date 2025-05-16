@@ -10,6 +10,7 @@ export type TaskContextType = {
   deleteTaskLocaly: (taskId: string) => void;
   refreshTasks: () => Promise<void>;
   toggleStatusTaskLocaly: (taskId: string) => void;
+  clearCompletedTasks: () => void;
 }
 
 interface TaskProviderProps {
@@ -50,6 +51,13 @@ export function TaskProvider({ children }: TaskProviderProps) {
     })
   }
 
+  function clearCompletedTasks() {
+    setTasks(state => {
+      state = tasks.filter(task => !task.checked)
+      return state
+    })
+  }
+
   const refreshTasks = async () => {
     const tasksData = await getTasks();
 
@@ -74,7 +82,8 @@ export function TaskProvider({ children }: TaskProviderProps) {
       addTaskLocaly,
       deleteTaskLocaly,
       refreshTasks,
-      toggleStatusTaskLocaly
+      toggleStatusTaskLocaly,
+      clearCompletedTasks
     }}>{children}</TaskContext.Provider>
   )
 }

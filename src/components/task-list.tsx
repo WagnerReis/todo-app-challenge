@@ -29,7 +29,7 @@ export interface Task {
 }
 
 export function TaskList() {
-  const { tasks, setTasks } = useTaskContext();
+  const { tasks, setTasks, clearCompletedTasks } = useTaskContext();
   const isMobile = useIsMobile();
 
   const sensors = useSensors(
@@ -80,7 +80,7 @@ export function TaskList() {
               {itemsLeft} {itemsLeft === 1 ? "item" : "items"} left
             </span>
             {!isMobile && <NavbarStatus />}
-            <button className="w-[250px] pr-6 flex items-center justify-end cursor-custom">
+            <button className="w-[250px] pr-6 flex items-center justify-end cursor-custom" onClick={clearCompletedTasks}>
               <span className="text-[14px] text-foreground hover:text-muted-foreground">
                 Clear Completed
               </span>
