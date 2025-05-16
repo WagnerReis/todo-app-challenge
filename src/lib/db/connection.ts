@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 // Importing mongoose library along with Connection type from it
 import mongoose, { Connection } from "mongoose";
 
@@ -21,8 +23,7 @@ export async function connectToMongoDB() {
     // Return the newly established connection
     return cachedConnection;
   } catch (error) {
-    // If an error occurs during connection, log the error and throw it
-    console.log(error);
+    console.error("Erro ao conectar no MongoDB:", error);
     throw error;
   }
 }

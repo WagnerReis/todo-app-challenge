@@ -1,5 +1,6 @@
 "use server";
 
+import { connectToMongoDB } from "@/lib/db/connection";
 import Task from "@/lib/models/Task";
 import { z } from "zod";
 
@@ -17,6 +18,8 @@ interface PrevStateProps {
 
 export async function createTask(prevState: PrevStateProps, formData: FormData) {
   try {
+    await connectToMongoDB();
+
     const raw = {
       description: formData.get("description")?.toString().trim(),
       completed: formData.get("checked") === "on",

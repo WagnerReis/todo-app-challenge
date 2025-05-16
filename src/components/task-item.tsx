@@ -1,4 +1,4 @@
-import { X } from "@phosphor-icons/react";
+import { DotsSixVertical, X } from "@phosphor-icons/react";
 import { Button } from "./ui/button";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
@@ -37,13 +37,14 @@ export function TaskItem({ id, task }: TaskItemProps) {
       ref={setNodeRef}
       {...attributes}
       style={style}
-      className="w-full h-16 bg-muted-background rounded-lg pl-6 flex items-center gap-6"
+      className="w-full h-16 bg-muted-background rounded-lg pl-2 flex items-center"
     >
+      <DotsSixVertical size={24} {...listeners} className="cursor-custom text-muted-foreground" />
       <Button checked={task.checked} onClick={async () => {
         toggleStatusTaskLocaly(task.id)
         await updateStatus(task.id, !task.checked)
       }} />
-      <div {...listeners} className="w-[calc(100%-6rem)] h-full flex items-center cursor-custom">
+      <div {...listeners} className="w-[calc(100%-6rem)] h-full flex items-center cursor-custom ml-3">
         <span
           className={`text-foreground text-[12px] md:text-[18px] ${task.checked ? "line-through text-muted-foreground" : ""
             }`}

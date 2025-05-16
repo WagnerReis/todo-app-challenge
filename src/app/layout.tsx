@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import { CustomThemeProvider } from "@/providers/custom-theme-provider";
-import { connectToMongoDB } from "@/lib/db/connection";
 
 const josefintSans = Josefin_Sans({
   variable: "--font-josefin-sans",
@@ -19,7 +18,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  connectToMongoDB();
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${josefintSans.variable} antialiased`}>

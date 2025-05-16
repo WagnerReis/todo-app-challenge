@@ -1,5 +1,6 @@
 "use server";
 import { Task as TaskProps } from "@/components/task-list";
+import { connectToMongoDB } from "@/lib/db/connection";
 import Task, { ITask } from "@/lib/models/Task";
 
 const queryMap = {
@@ -10,7 +11,9 @@ const queryMap = {
 
 export async function getTasks(query: keyof typeof queryMap) {
   try {
-    console.log(queryMap[query])
+    await connectToMongoDB();
+
+    console.log(process.env.MONGODB_URI)
     const tasks = await Task.find(queryMap[query], {}, { sort: { completed: 1 } }).lean().exec();
     return getTasksMapper(tasks as unknown as ITask[]);
   } catch (error) {
