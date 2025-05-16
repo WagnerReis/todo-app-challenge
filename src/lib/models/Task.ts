@@ -10,7 +10,7 @@ export interface ITask extends Document {
 const TaskSchema: Schema = new Schema(
   {
     description: { type: String, required: true },
-    completed: { type: String, required: true },
+    completed: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
