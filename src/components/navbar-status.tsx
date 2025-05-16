@@ -1,5 +1,6 @@
 "use client";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useTaskContext } from "@/hooks/use-task-context";
 import { useState } from "react";
 
 type StatusType = "All" | "Active" | "Completed";
@@ -27,6 +28,7 @@ function NavItem({ label, onClick, selected }: NavItemProps) {
 }
 
 export function NavbarStatus() {
+  const { setQuery } = useTaskContext();
   const [selected, setIsSelected] = useState<StatusType>("All");
   const isMobile = useIsMobile();
 
@@ -41,7 +43,10 @@ export function NavbarStatus() {
           key={status}
           label={status}
           selected={selected}
-          onClick={() => setIsSelected(status)}
+          onClick={() => {
+            setQuery(status)
+            setIsSelected(status)
+          }}
         />
       ))}
     </nav>

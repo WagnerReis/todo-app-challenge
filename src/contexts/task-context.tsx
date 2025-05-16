@@ -6,6 +6,7 @@ import { createContext, Dispatch, ReactNode, useEffect, useState } from "react";
 export type TaskContextType = {
   tasks: TaskProps[];
   setTasks: Dispatch<React.SetStateAction<TaskProps[]>>;
+  setQuery: (status: QueryOptions) => void;
   addTaskLocaly: (newTask: TaskProps) => void;
   deleteTaskLocaly: (taskId: string) => void;
   refreshTasks: () => Promise<void>;
@@ -25,8 +26,11 @@ interface TaskProps {
 
 export const TaskContext = createContext({} as TaskContextType)
 
+type QueryOptions = "All" | "Active" | "Completed";
+
 export function TaskProvider({ children }: TaskProviderProps) {
   const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [query, setQuery] = useState<QueryOptions>("All")
 
   function addTaskLocaly(newTask: TaskProps) {
     setTasks(state => [...state, newTask])
@@ -59,7 +63,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
   }
 
   const refreshTasks = async () => {
-    const tasksData = await getTasks();
+    const tasksData = await getTasks(query);
 
     const formattedTasks = tasksData.map(task => ({
       id: task.id as string,
@@ -72,13 +76,14 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
   useEffect(() => {
     refreshTasks()
-  }, [])
+  }, [query])
 
 
   return (
     <TaskContext.Provider value={{
       tasks,
       setTasks,
+      setQuery,
       addTaskLocaly,
       deleteTaskLocaly,
       refreshTasks,

@@ -36,7 +36,6 @@ export async function createTask(prevState: PrevStateProps, formData: FormData) 
       description: raw.description as string,
       completed: raw.completed as boolean,
     };
-    console.log("🚀 ~ createTask ~ task:", task)
 
     console.log("creating task...");
 
