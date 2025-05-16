@@ -34,7 +34,7 @@ export function TaskInput() {
     <form
       ref={formRef}
       action={formAction}
-      className="w-full h-16 bg-muted-background rounded-lg px-6 flex items-center gap-6 mt-10 mb-6"
+      className="w-full h-16 bg-muted-background rounded-lg px-6 flex items-center gap-6 mt-1 mb-6"
     >
       <label className="relative w-6 h-6">
         <input
