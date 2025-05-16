@@ -6,8 +6,8 @@ import { createContext, Dispatch, ReactNode, useEffect, useState } from "react";
 export type TaskContextType = {
   tasks: TaskProps[];
   setTasks: Dispatch<React.SetStateAction<TaskProps[]>>;
-  addTask: (newTask: TaskProps) => void;
-  deleteTask: (taskId: string) => void;
+  addTaskLocaly: (newTask: TaskProps) => void;
+  deleteTaskLocaly: (taskId: string) => void;
   refreshTasks: () => Promise<void>;
 }
 
@@ -26,11 +26,11 @@ export const TaskContext = createContext({} as TaskContextType)
 export function TaskProvider({ children }: TaskProviderProps) {
   const [tasks, setTasks] = useState<TaskProps[]>([])
 
-  function addTask(newTask: TaskProps) {
+  function addTaskLocaly(newTask: TaskProps) {
     setTasks(state => [...state, newTask])
   }
 
-  function deleteTask(taskId: string) {
+  function deleteTaskLocaly(taskId: string) {
     setTasks(state => {
       state = tasks.filter(task => task.id !== taskId)
       return state
@@ -55,6 +55,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
 
   return (
-    <TaskContext.Provider value={{ tasks, setTasks, addTask, deleteTask, refreshTasks }}>{children}</TaskContext.Provider>
+    <TaskContext.Provider value={{ tasks, setTasks, addTaskLocaly, deleteTaskLocaly, refreshTasks }}>{children}</TaskContext.Provider>
   )
 }

@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useTaskContext } from "@/hooks/use-task-context";
 
 export function TaskInput() {
-  const { addTask } = useTaskContext();
+  const { addTaskLocaly } = useTaskContext();
   const formRef = useRef<HTMLFormElement>(null);
 
   const clientAction = async (state: { error: string; success?: string } | { success: string }, formData: FormData) => {
@@ -16,7 +16,7 @@ export function TaskInput() {
     if (description && description.trim() !== "") {
       const tempId = `temp-${Date.now()}`;
 
-      addTask({
+      addTaskLocaly({
         id: tempId,
         description: description.trim(),
         checked: checked

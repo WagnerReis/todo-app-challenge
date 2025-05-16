@@ -20,6 +20,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useTaskContext } from "@/hooks/use-task-context";
+import { Fragment } from "react";
 
 export interface Task {
   id: string;
@@ -62,10 +63,7 @@ export function TaskList() {
           <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
             <div>
               {tasks.map((task, index) => (
-                <div key={task.id}>
-                  <TaskItem id={task.id} task={task} />
-                  {index < tasks.length - 1 && <Separator />}
-                </div>
+                <TaskItem key={task.id} id={task.id} task={task} />
               ))}
             </div>
           </SortableContext>
@@ -87,6 +85,6 @@ export function TaskList() {
       </div>
 
       {isMobile && <NavbarStatus />}
-    </main>
+    </main >
   );
 }
