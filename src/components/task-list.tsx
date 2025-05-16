@@ -52,6 +52,8 @@ export function TaskList() {
     }
   }
 
+  const itemsLeft = tasks.filter((task) => !task.checked).length;
+
   return (
     <main>
       <div className="w-full min-h-[368px] flex flex-col bg-muted-background rounded-lg shadow-xl overflow-hidden">
@@ -63,7 +65,10 @@ export function TaskList() {
           <SortableContext items={tasks} strategy={verticalListSortingStrategy}>
             <div>
               {tasks.map((task, index) => (
-                <TaskItem key={task.id} id={task.id} task={task} />
+                <Fragment key={task.id}>
+                  <TaskItem id={task.id} task={task} />
+                  {index !== tasks.length - 1 && <Separator />}
+                </Fragment>
               ))}
             </div>
           </SortableContext>
@@ -72,7 +77,7 @@ export function TaskList() {
           <Separator />
           <div className="flex justify-between h-12 w-full">
             <span className="text-[14px] w-[250px] pl-6 flex items-center text-gray-400">
-              5 items left
+              {itemsLeft} {itemsLeft === 1 ? "item" : "items"} left
             </span>
             {!isMobile && <NavbarStatus />}
             <button className="w-[250px] pr-6 flex items-center justify-end cursor-custom">
