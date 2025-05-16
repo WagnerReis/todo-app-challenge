@@ -3,7 +3,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { NavbarStatus } from "./navbar-status";
 import { TaskItem } from "./task-item";
 import { Separator } from "./ui/separator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   DndContext,
@@ -20,23 +20,33 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { getTasks } from "@/app/actions/get-tasks";
 
-interface Task {
+export interface Task {
   id: string;
+  description: string;
   checked: boolean;
 }
 
-const data = [
-  { id: "1", checked: false },
-  { id: "2", checked: true },
-  { id: "3", checked: false },
-  { id: "4", checked: true },
-  { id: "5", checked: false },
-];
-
 export function TaskList() {
-  const [tasks, setTasks] = useState<Task[]>(data);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasksData = await getTasks();
+
+      const formattedTasks = tasksData.map(task => ({
+        id: task.id as string,
+        checked: task.checked || false,
+        description: task.description
+      }));
+
+      setTasks(formattedTasks);
+    };
+
+    fetchTasks();
+  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -70,7 +80,7 @@ export function TaskList() {
             <div>
               {tasks.map((task, index) => (
                 <div key={task.id}>
-                  <TaskItem id={task.id} checked={task.checked} />
+                  <TaskItem id={task.id} task={task} />
                   {index < tasks.length - 1 && <Separator />}
                 </div>
               ))}
