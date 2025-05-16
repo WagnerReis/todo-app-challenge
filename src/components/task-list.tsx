@@ -3,7 +3,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { NavbarStatus } from "./navbar-status";
 import { TaskItem } from "./task-item";
 import { Separator } from "./ui/separator";
-import { useEffect, useState } from "react";
 
 import {
   DndContext,
@@ -20,7 +19,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { getTasks } from "@/app/actions/get-tasks";
+import { useTaskContext } from "@/hooks/use-task-context";
 
 export interface Task {
   id: string;
@@ -29,24 +28,8 @@ export interface Task {
 }
 
 export function TaskList() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { tasks, setTasks } = useTaskContext();
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const tasksData = await getTasks();
-
-      const formattedTasks = tasksData.map(task => ({
-        id: task.id as string,
-        checked: task.checked || false,
-        description: task.description
-      }));
-
-      setTasks(formattedTasks);
-    };
-
-    fetchTasks();
-  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -59,9 +42,9 @@ export function TaskList() {
     const { active, over } = event;
 
     if (active.id !== over?.id) {
-      setTasks((items) => {
-        const oldIndex = items.findIndex((task) => task.id === active.id);
-        const newIndex = items.findIndex((task) => task.id === over?.id);
+      setTasks((items: Task[]) => {
+        const oldIndex = items.findIndex((task: Task) => task.id === active.id);
+        const newIndex = items.findIndex((task: Task) => task.id === over?.id);
 
         return arrayMove(items, oldIndex, newIndex);
       });
